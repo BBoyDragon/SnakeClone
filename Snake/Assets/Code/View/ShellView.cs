@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class ShellView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private NextIterationModelView IterationViewModel;
+    private SpriteRenderer Renderer;
+    public void Inicialize(NextIterationModelView _IterationViewModel)
     {
-        
+        IterationViewModel = _IterationViewModel;
+        Renderer = gameObject.GetComponent<SpriteRenderer>();
+        IterationViewModel.StateChanged += SpriteChange;
+        SpriteChange();
     }
-
-    // Update is called once per frame
-    void Update()
+    private  void SpriteChange()
     {
-        
+        Renderer.sprite = IterationViewModel.shell._CurentSprite;
     }
 }

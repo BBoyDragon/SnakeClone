@@ -35,22 +35,22 @@ class HeadSnakeState:State,ISnakePart
         {
             case 1:
                 Shell.UpShell.CurentState = new HeadSnakeState();
-                Shell.CurentState = new StandartState();
+                Shell.CurentState = new WasPartOfSnake();
                 break;
 
             case 2:
                 Shell.RightShell.CurentState = new HeadSnakeState();
-                Shell.CurentState = new StandartState();
+                Shell.CurentState = new WasPartOfSnake();
                 break;
 
             case 3:
                 Shell.DownShell.CurentState = new HeadSnakeState();
-                Shell.CurentState = new StandartState();
+                Shell.CurentState = new WasPartOfSnake(); 
                 break;
 
             case 4:
                 Shell.LeftShell.CurentState = new HeadSnakeState();
-                Shell.CurentState = new StandartState();
+                Shell.CurentState = new WasPartOfSnake();
                 break;
                 
         }

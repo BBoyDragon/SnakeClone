@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ShellModel
 {
-    private Sprite _CurentSprite;
-    private State _CurentState;
+    public Sprite _CurentSprite;
+    public  State _CurentState;
 
     public  ShellModel RightShell;
     public  ShellModel LeftShell;
@@ -18,6 +18,7 @@ public class ShellModel
     public ShellModel(State StartState)
     {
         _CurentState = StartState;
+        _CurentSprite = StartState.StateSprite;
     }
 
     public State CurentState

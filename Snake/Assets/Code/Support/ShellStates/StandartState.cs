@@ -13,7 +13,8 @@ class StandartState : State
         {
             if (_StateSprite = null)
             {
-                _StateSprite = Resources.Load<Sprite>("StandartSprite");
+                _StateSprite = Resources.Load<Sprite>("sprite");
+                Debug.Log("spritw");
             }
             return _StateSprite;
         }
