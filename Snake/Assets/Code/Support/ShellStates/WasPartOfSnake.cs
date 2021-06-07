@@ -12,9 +12,9 @@ class WasPartOfSnake : State
     {
         get
         {
-            if (_StateSprite = null)
+            if (_StateSprite == null)
             {
-                _StateSprite = Resources.Load<Sprite>("StandartSprite");
+                _StateSprite = Resources.Load<Sprite>("sprite");
             }
             return _StateSprite;
         }

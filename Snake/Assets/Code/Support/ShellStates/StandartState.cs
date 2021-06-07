@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 
 class StandartState : State
@@ -11,10 +12,9 @@ class StandartState : State
     {
         get
         {
-            if (_StateSprite = null)
+            if (_StateSprite == null)
             {
                 _StateSprite = Resources.Load<Sprite>("sprite");
-                Debug.Log("spritw");
             }
             return _StateSprite;
         }
@@ -22,6 +22,6 @@ class StandartState : State
 
     public override void Handle(ShellModel Shell)
     {
-        throw new NotImplementedException();
+        Debug.Log("try to spawn an apple");
     }
 }

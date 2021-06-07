@@ -13,8 +13,14 @@ public class ShellView : MonoBehaviour
         IterationViewModel.StateChanged += SpriteChange;
         SpriteChange();
     }
-    private  void SpriteChange()
+    private void SpriteChange()
     {
+
+        Renderer.sprite = IterationViewModel.shell._CurentSprite;
+    }
+    IEnumerator DelayedSpriteRender()
+    {
+        yield return new WaitForSeconds(1f);
         Renderer.sprite = IterationViewModel.shell._CurentSprite;
     }
 }

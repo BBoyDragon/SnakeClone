@@ -4,9 +4,5 @@ using UnityEngine;
 
 public interface ISnakePart
 {
-    int Direction
-    {
-        set;
-    }
 }
 

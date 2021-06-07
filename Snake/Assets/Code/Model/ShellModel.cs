@@ -12,6 +12,8 @@ public class ShellModel
     public ShellModel UpShell;
     public ShellModel DownShell;
 
+    public ShellModel NextShell;
+
 
 
 
@@ -28,6 +30,10 @@ public class ShellModel
             _CurentState = value;
             _CurentSprite = _CurentState.StateSprite;
 
+        }
+        get
+        {
+            return _CurentState;
         }
     }
     public void Reqest()

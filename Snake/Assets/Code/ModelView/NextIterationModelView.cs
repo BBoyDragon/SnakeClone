@@ -3,35 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class NextIterationModelView 
+public class NextIterationModelView: IComparable<NextIterationModelView>
 {
     public ShellModel shell;
     public event Action StateChanged = delegate () { };
+    public NextIterationModelView nextPart
+    {
+        get;
+        set;
+    }
+
+    public int CompareTo(NextIterationModelView  comparePart)
+    {
+        return shell.CurentState.Number.CompareTo(comparePart.shell.CurentState.Number);
+    }
 
     public NextIterationModelView(ShellModel _Shell)
     {
         shell = _Shell;
     }
 
-    public void Iteration()
+    public void IterationStart()
     {
-        shell.Reqest();
         StateChanged.Invoke();
+        shell.Reqest();
+        
 
     }
+    public NextIterationModelView NextGo()
+    {
+        IterationStart();
+        if (nextPart != null)
+        {
+            nextPart.NextGo();
+        }
+        return nextPart;
+    }
 
+    public NextIterationModelView  SetNext(NextIterationModelView snakeShell)
+    {
+        snakeShell.shell.NextShell = shell;
+        nextPart = snakeShell;
 
-    //ShellModel [,] Field = new ShellModel [4, 4];
-    //ShellModel SimpleShell = Resources.Load<ShellView>("Player");
-    //public NextIterationModelView()
-    //{
-    //    for(int i = 0; i <= 4; i++)
-    //    {
-    //        for(int j = 0; j <= 4; j++)
-    //        {
-    //            Field[i,j]=
-    //        }
-    //    }
-    //}
+        return snakeShell;
+    }
+
 }
-//_Player = GameObject.Instantiate(gameObject);

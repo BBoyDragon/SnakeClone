@@ -5,24 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-class HeadSnakeState:State,ISnakePart 
+class HeadSnakeState : State,ISnakePart
 {
-    public int Direction
-    {
-        get
-        {
-            return Direction;
-        }
-        set
-        {
-
-        }
-    }
+    public override event Action EatApple = delegate () { };
+    public override event Action Dead = delegate () { };
     public override Sprite StateSprite
     {
         get
         {
-            if (_StateSprite = null)
+            if (_StateSprite == null)
             {
                 _StateSprite = Resources.Load<Sprite>("SnakeHeadSprite");
             }
@@ -34,26 +25,42 @@ class HeadSnakeState:State,ISnakePart
         switch (Direction)
         {
             case 1:
-                Shell.UpShell.CurentState = new HeadSnakeState();
-                Shell.CurentState = new WasPartOfSnake();
+                CheckOrUseShell(Shell.UpShell, Shell);
                 break;
 
             case 2:
-                Shell.RightShell.CurentState = new HeadSnakeState();
-                Shell.CurentState = new WasPartOfSnake();
+                CheckOrUseShell(Shell.RightShell, Shell);
                 break;
 
             case 3:
-                Shell.DownShell.CurentState = new HeadSnakeState();
-                Shell.CurentState = new WasPartOfSnake(); 
+                CheckOrUseShell(Shell.DownShell, Shell);
                 break;
 
             case 4:
-                Shell.LeftShell.CurentState = new HeadSnakeState();
-                Shell.CurentState = new WasPartOfSnake();
+                CheckOrUseShell(Shell.LeftShell, Shell);
                 break;
-                
+
         }
 
+    }
+    private void CheckOrUseShell(ShellModel CheckableShell,ShellModel ThisShell)
+    {
+        if ((CheckableShell.CurentState is BorderState)||(CheckableShell.CurentState is SnakeState))
+        {
+            Dead.Invoke();
+        }
+        else if (CheckableShell.CurentState is AppleState)
+        {
+            EatApple.Invoke();
+            CheckableShell.CurentState = new HeadSnakeState();
+            CheckableShell.CurentState.Number = 1;
+            ThisShell.CurentState = new StandartState();
+        }
+        else
+        {
+            CheckableShell.CurentState = new HeadSnakeState();
+            CheckableShell.CurentState.Number = 1;
+            ThisShell.CurentState = new StandartState();
+        }
     }
 }
